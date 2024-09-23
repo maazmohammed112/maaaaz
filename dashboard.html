@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="light-mode">
+
+    <button class="toggle-mode" onclick="toggleMode()">
+        <i class="fas fa-lightbulb"></i>
+    </button>
+
+    <div class="container">
+        <h1>Welcome to Your Dashboard</h1>
+        <p id="userInfo"></p>
+        <img id="profilePic" src="" alt="Profile Picture" style="border-radius: 50%; width: 100px; height: 100px; margin: 20px auto;">
+        
+        <div class="links">
+            <a id="linkedinLink" href="" target="_blank" class="link-button">LinkedIn Profile</a>
+            <a id="portfolioLink" href="" target="_blank" class="link-button">Portfolio</a>
+        </div>
+
+        <div class="button-group">
+            <button onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            document.querySelector('.toggle-mode i').className = isDarkMode ? 'fas fa-sun' : 'fas fa-lightbulb';
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+
+        window.onload = function() {
+            const username = localStorage.getItem('username');
+            const profilePicSrc = localStorage.getItem('profilePic');
+            const linkedin = localStorage.getItem('linkedin');
+            const portfolio = localStorage.getItem('portfolio');
+
+            document.getElementById('userInfo').innerText = `Logged in as: ${username}`;
+            if (profilePicSrc) {
+                document.getElementById('profilePic').src = profilePicSrc;
+            }
+            document.getElementById('linkedinLink').href = linkedin;
+            document.getElementById('portfolioLink').href = portfolio;
+        };
+    </script>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        body.light-mode {
+            background-color: #f0f4f7;
+            color: #333;
+        }
+
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            width: 400px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .links {
+            margin: 20px 0;
+        }
+
+        .link-button {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 5px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .link-button:hover {
+            background-color: #0056b3;
+        }
+
+        .button-group {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .toggle-mode {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</body>
+</html>
