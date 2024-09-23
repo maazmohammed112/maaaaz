@@ -48,5 +48,5 @@ app.post('/api/login', async (req, res) => {
 });
 
 // Connect to MongoDB
-mongoose.connect('your_mongodb_connection_string', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://maaz:Maaz@2002@cluster.mongodb.net/<dbname>?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 app.listen(5000, () => console.log('Server running on port 5000'));
